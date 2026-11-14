@@ -464,6 +464,70 @@ Do not use “100% complete,” “fully functional,” “tested,” or “read
 
 ---
 
+## 15A. Owner's completion order — finish the product, do not stop at the first package
+
+**This is an explicit owner instruction to carry the implementation through to the furthest verifiable completion state.** The reported 0.1.0-1 package build and 18 passing tests are a milestone, not the end of the assignment. Do not respond with another list of suggested follow-ups while leaving work that can be performed in the repository unfinished.
+
+### Required execution behavior
+
+- Resume from the actual current repository and working tree. Inspect the current branch, uncommitted changes, latest commit, package, and implementation before changing anything. Do not assume the local machine or GitHub branch is synchronized.
+- Review the actual implementation against every requirement and acceptance criterion in CR-001. The prior status summary is useful context, not proof that every feature works.
+- Work through all remaining software, test, documentation, packaging, installation, and release tasks in sequence. Fix defects discovered; do not merely report them.
+- Do not stop after a successful test suite, package build, static inspection, or smoke test. Continue to the next unfinished checkpoint.
+- Do not ask the owner to perform work that the engineering agent can safely perform itself. Ask only when an essential owner decision, physical hardware, physical access, or explicit destructive-action authorization is genuinely required.
+- Do not create a VM merely to satisfy a testing checkbox. A virtual machine is optional, not a project requirement.
+
+### Install and validate on the owner's actual Linux environment first
+
+The owner's working development environment is Parrot OS. Use that actual Parrot OS machine for the first real package installation and desktop validation unless a concrete compatibility or safety reason prevents it.
+
+Required steps:
+1. Inspect package metadata and contents; validate dependencies, file permissions/ownership, desktop entry, icon installation, AppStream metadata, polkit/helper installation, and uninstall behavior.
+2. Install the built `.deb` on the Parrot OS host using the system package manager and required administrative authorization. Do not silently substitute an extracted-package test for an actual installation.
+3. Launch the application as the ordinary desktop user from the application menu and directly for diagnostics where needed. Never launch the GUI as root.
+4. Verify the real GTK interface, wizard navigation, catalog lookup, download/cache flow, device refresh, protected-device exclusions, privilege prompts, diagnostics, and error states that can be tested safely on this host.
+5. Verify upgrade/reinstall and clean removal. Inspect for orphaned files and unintended user-home changes.
+6. Record the exact Parrot OS version, desktop/session, package version, commands, logs, and outcomes.
+
+A clean VM/container may be added later for portability testing if useful, but it is not a prerequisite and must not delay validation on the owner's actual machine. If a test cannot be run on Parrot, explain the specific reason and use the smallest suitable alternative.
+
+### Finish all non-hardware work
+
+Before asking the owner for physical hardware access, complete all work that does not require it:
+- Review every source module and security boundary, especially the privileged writer, device identity revalidation, root/system-disk ancestry checks, archive extraction, URL/redirect validation, and cancellation/error handling.
+- Exercise the official catalog and image download end-to-end when network access is available; add deterministic fixtures for offline CI.
+- Test the complete GUI wizard with fixtures and simulated success/failure cases, not only that the window starts under Xvfb.
+- Expand tests to cover every safety-critical branch and every bug found during review. The reported 18 passing tests are a baseline, not a cap or a substitute for coverage.
+- Resolve packaging warnings when practical (including the missing man page warning if applicable); document any warning that legitimately remains.
+- Verify all README links, screenshots, installation instructions, project/license/third-party notices, credits, and non-affiliation wording.
+- Verify icon assets and desktop integration at actual installed sizes.
+- Ensure CI builds and tests the current package from a clean checkout.
+- Build a fresh final package after the last code change; do not publish a stale artifact.
+- Generate the final SHA-256 from the exact release artifact and verify it again after copying/uploading.
+- Prepare release notes, supported-system statement, known limitations, and a GitHub Release draft.
+
+### Physical USB and Chromebook validation
+
+After all safe software and host validation is complete:
+- Use only a dedicated sacrificial USB drive whose contents may be erased. Never test against the host system disk, a personal storage drive, or an unidentified device.
+- Confirm the exact physical target and its identity immediately before any destructive test. Do not begin a real-device write if the target is ambiguous or the owner has not explicitly authorized erasing that specific test drive.
+- Complete actual USB write, flush, read-back verification, safe-eject, disconnect/reconnect, and failure-path tests. Record the drive make/model/capacity and exact image used.
+- Attempt actual recovery-media boot on a supported Chromebook only when the device is legitimately available and the owner authorizes the test. Do not attempt enterprise-enrollment, MDM, ownership, or firmware-lock circumvention.
+- If physical hardware is unavailable, finish all other work and mark only the hardware-dependent acceptance items as pending. Do not fabricate results or call hardware validation passed.
+
+### Release completion and handoff
+
+Do not stop at a local `.deb`. Once all software and available hardware checks pass:
+- Build and validate the final versioned amd64 `.deb` from the final commit.
+- Publish the GitHub Release with the package, verified SHA-256, release notes, installation instructions, supported-system details, and honest hardware-validation status, subject to the owner's existing release approval.
+- If the owner's approval is required for publication, prepare the complete release and ask only for that final approval; do not leave unrelated work incomplete.
+- Update README, CHANGELOG, TEST_PLAN, RELEASE, and architecture/security documentation to match the delivered implementation.
+- Produce the final CR-001 report with commit ID, exact artifact name/size/hash, actual host installation result, test commands and results, CI result, hardware matrix, unresolved blockers, and exact remaining owner action (if any).
+
+**Definition of done:** every requirement that can be implemented and verified without unavailable physical resources is completed, tested, documented, and packaged. The only remaining items may be explicitly identified hardware/owner-authorization dependencies. No speculative completion claims, no fake test results, no unnecessary VM detour, and no handing the owner a task the agent can complete itself.
+
+---
+
 ## 16. Authoritative references
 
 - ChromiumOS user recovery tools: https://chromium.googlesource.com/chromiumos/user-recovery-tools/
