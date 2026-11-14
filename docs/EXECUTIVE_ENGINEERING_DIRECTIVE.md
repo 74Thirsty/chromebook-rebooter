@@ -173,6 +173,24 @@ The upstream script documents a Linux workflow for retrieving the recovery confi
 
 Do not assume Google's metadata schema is immutable. Add parser fixtures based on real, captured metadata and tests for missing, duplicate, malformed, old, and newly added fields. The application must display when the official metadata service is unavailable and must not fabricate a local catalogue as if it were current.
 
+## 5A. Related open-source Chromebook projects — permitted research and reuse
+
+The owner explicitly authorizes the engineering agent to investigate relevant open-source Chromebook projects—including **Shimboot** and **sh1mmer** (the project name uses the numeral **1**)—as potential references or sources of reusable components. Do not assume either project is suitable: identify the exact upstream repository, maintainer, current status, source files, license, supported devices, and actual behavior before relying on it.
+
+This authorization means:
+- You may study their documented workflows, device-detection methods, recovery/boot-media handling, compatibility information, and reusable non-circumvention components.
+- You may adapt or incorporate components only when their licenses permit it, attribution and notices are preserved, the code is maintained and technically appropriate, and it directly supports this product's authorized scope.
+- You may document interoperability or explain how a user can separately obtain/use a related tool, provided the instructions are accurate, lawful, and do not misrepresent Chromebook Rebooter as that tool.
+- Keep any optional integration isolated, clearly labeled, disabled by default unless explicitly approved, and covered by tests and the same USB safety controls.
+
+**Scope boundary:** Chromebook Rebooter remains a ChromeOS recovery-media creator. Shimboot's separate Linux-boot workflow is not automatically part of this product; do not add a general Linux-boot mode or change the product's purpose without a written owner-approved scope change.
+
+**Security and authorization boundary:** Do not implement, adapt, automate, or provide operational instructions for using sh1mmer or any other exploit/utility to bypass or remove enterprise enrollment, MDM, device ownership, activation, firmware locks, or organization controls. Do not use such a tool to circumvent management on a device. The existing prohibition on MDM/enrollment/ownership bypass remains absolute. If an upstream project combines legitimate recovery functionality with circumvention functionality, isolate and exclude the circumvention portions; if that cannot be done confidently, do not reuse the project.
+
+Before any reuse, add an upstream audit record to `THIRD_PARTY_NOTICES.md` and document the exact repository URL, commit/tag, files reused, license, notices, security review, and tests. If no safe, license-compatible component is identified, report that conclusion and proceed with the native implementation; do not force an integration merely because the project was named.
+
+---
+
 ## 6. Technical architecture
 
 Choose a small, supportable architecture that can be packaged reliably on Debian-derived distributions. The preferred direction is:
