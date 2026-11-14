@@ -38,7 +38,7 @@ Creating recovery media is separate from using it to recover a Chromebook. Using
 
 Copyright © 2026 C.E. Hirschauer. Project-authored code and original project materials are credited to C.E. Hirschauer, subject to the project's license and all applicable third-party rights.
 
-The Android robot mascot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License. Android is a trademark of Google LLC. Google, Chromebook, and ChromeOS are trademarks of their respective owners.
+The Android robot is reproduced or modified from work created and shared by Google and used according to terms described in the Creative Commons 3.0 Attribution License. Android is a trademark of Google LLC. Google, Chromebook, and ChromeOS are trademarks of their respective owners. Google retains trademark rights to the Android robot and its derivatives.
 
 **Chromebook Rebooter is an independent project and is not affiliated with, endorsed by, or sponsored by Google LLC.**
 
