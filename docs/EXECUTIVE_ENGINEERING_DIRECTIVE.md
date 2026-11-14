@@ -539,3 +539,40 @@ Do not stop at a local `.deb`. Once all software and available hardware checks p
 - Debian packaging guide: https://www.debian.org/doc/manuals/packaging-tutorial/packaging-tutorial.en.pdf
 
 **Owner directive:** Build the complete product. Preserve evidence. Protect user disks. Credit the owner and every upstream creator correctly. Ship a real, tested Debian package—not a demo.
+
+
+---
+
+## 17. Owner amendment CR-001-A — separate product goals from mandatory Debian packaging
+
+**Authority:** Project owner  
+**Status:** APPROVED — binding clarification to CR-001  
+**Effective:** Immediately  
+**Scope:** Document structure, requirement classification, and agent interpretation. This amendment does not remove, weaken, defer, or make optional the Debian package requirement.
+
+### 17.1 Binding distinction
+
+The engineering agent MUST distinguish between:
+
+1. **Product goals and application behavior** — what Chromebook Rebooter does for its users.
+2. **Packaging, distribution, and release requirements** — how the completed application is built, installed, distributed, and released.
+
+A Debian `.deb` package is an **immutable, mandatory release/distribution requirement**. It is **not** an application feature, user workflow, or product goal. Do not list the `.deb` package as a product goal or describe package generation as something the application itself does.
+
+### 17.2 Required document organization
+
+- Keep Section 4, **Product definition and user workflow**, focused exclusively on the application's purpose and user-facing recovery-media workflow.
+- Keep Debian package format, architecture, build, installation, upgrade, removal, CI, artifact, checksum, and GitHub Release requirements in Section 11, **Debian release requirements**, and the relevant packaging/release phases and acceptance criteria.
+- In Section 1, describe the product outcome as a complete Linux desktop application, and describe the tested installable Debian `.deb` separately as a mandatory delivery/release condition.
+- In Section 2, packaging may remain a release priority; it must not be characterized as an application capability.
+- In README and other product-facing descriptions, explain what the application does separately from how Linux users install it. Installation instructions may and should identify the `.deb` as the required distribution artifact.
+
+### 17.3 Non-negotiable packaging requirement
+
+The agent MUST continue to build, test, and deliver the versioned Linux `.deb` as required by Sections 11, 13, 14, and 15A. This amendment is not authorization to replace it with an AppImage, Flatpak, source archive, or another format, nor to remove Debian packaging or its acceptance checks. Additional formats may be considered only as supplementary distribution options and must not displace the mandatory `.deb`.
+
+### 17.4 Agent execution instruction
+
+Treat this amendment as a binding correction to the classification and presentation of requirements. Do not reinterpret the owner's objection as a request to remove the `.deb` requirement. Do not ask the owner to restate this distinction. When editing the directive or related documentation, preserve all mandatory Debian packaging and release obligations while keeping them out of the product-goals list.
+
+**Acceptance check:** the product-goals section describes application behavior only; Debian `.deb` requirements remain explicit, mandatory, and fully enforceable in the packaging/distribution/release sections.
